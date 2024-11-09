@@ -25,5 +25,8 @@ public struct RaceListView: View {
         Self.Content(
             state: viewModel.state
         )
+        .task {
+            await viewModel.load()
+        }
     }
 }

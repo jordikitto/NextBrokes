@@ -9,7 +9,7 @@ import Foundation
 import FeatureRacingData
 import CoreNetworking
 
-public struct Race: Identifiable, Equatable {
+public struct Race: Identifiable, Equatable, Sendable {
     public var id: String
     public let startDate: Date
     public let meetingName: String

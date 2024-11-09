@@ -9,7 +9,7 @@ import Foundation
 import CoreNetworking
 import FeatureRacingData
 
-public protocol RacingRepositoryProtocol {
+public protocol RacingRepositoryProtocol: Sendable {
     func fetchNextRaces(count: Int) async throws -> NetworkRacingRequest.RacingResult
 }
 

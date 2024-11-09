@@ -9,6 +9,7 @@ import Foundation
 import FeatureRacingDomain
 
 extension RaceListView {
+    @MainActor
     final class ViewModel: ObservableObject {
         enum State: Equatable {
             case loading

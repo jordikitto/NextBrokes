@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct NetworkEnvironment {
+public struct NetworkEnvironment: Sendable {
     let domain: String
     let basePath: String
     

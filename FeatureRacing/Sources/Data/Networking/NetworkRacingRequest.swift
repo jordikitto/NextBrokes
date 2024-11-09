@@ -15,7 +15,7 @@ public struct NetworkRacingRequest: NetworkRequestProtocol {
     
     public init(method: Method, count: Int) {
         // TODO: Implement header encoding
-        self.path = "/racing/?method=\(method.rawValue)&count=/\(count)"
+        self.path = "/racing/?method=\(method.rawValue)&count=\(count)"
     }
     
     public enum Method: String {

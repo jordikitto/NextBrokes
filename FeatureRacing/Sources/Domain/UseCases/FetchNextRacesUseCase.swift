@@ -8,7 +8,7 @@
 import Foundation
 import FeatureRacingData
 
-public protocol FetchNextRacesUseCaseProtocol {
+public protocol FetchNextRacesUseCaseProtocol: Sendable {
     func callAsFunction(count: Int) async throws -> [Race]
 }
 

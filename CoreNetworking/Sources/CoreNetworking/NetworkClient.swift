@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol NetworkClientProtocol {
+public protocol NetworkClientProtocol: Sendable {
     func fetch<Request: NetworkRequestProtocol>(_ request: Request) async throws -> Request.Response
 }
 

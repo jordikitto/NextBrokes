@@ -27,6 +27,8 @@
 		D1348BB12CDEEE960070DF4C /* NextBrokes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextBrokes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1348BC12CDEEE980070DF4C /* NextBrokesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextBrokesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1348BCB2CDEEE980070DF4C /* NextBrokesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextBrokesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1348BDE2CDEEF520070DF4C /* CoreDesign */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreDesign; sourceTree = "<group>"; };
+		D1348BDF2CDEEF930070DF4C /* FeatureRacing */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FeatureRacing; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +77,8 @@
 		D1348BA82CDEEE960070DF4C = {
 			isa = PBXGroup;
 			children = (
+				D1348BDE2CDEEF520070DF4C /* CoreDesign */,
+				D1348BDF2CDEEF930070DF4C /* FeatureRacing */,
 				D1348BB32CDEEE960070DF4C /* NextBrokes */,
 				D1348BC42CDEEE980070DF4C /* NextBrokesTests */,
 				D1348BCE2CDEEE980070DF4C /* NextBrokesUITests */,

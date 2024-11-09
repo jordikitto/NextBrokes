@@ -34,7 +34,10 @@ let package = Package(
                 "CoreNetworking",
                 "FeatureRacingData"
             ],
-            path: "Sources/Domain"
+            path: "Sources/Domain",
+            swiftSettings: [
+                .swiftLanguageMode(.v5) // DateTrigger
+            ]
         ),
         .target(
             name: "FeatureRacingData",

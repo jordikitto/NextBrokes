@@ -16,7 +16,9 @@ public struct RaceListView: View {
     ) {
         self._viewModel = .init(
             wrappedValue: .init(
-                fetchNextRaces: racingUseCaseFactory.fetchNextRacesUseCase()
+                fetchNextRaces: racingUseCaseFactory.fetchNextRacesUseCase(),
+                removeOldRaces: racingUseCaseFactory.removeOldRacesUserCase(),
+                cleanupTrigger: DateTrigger()
             )
         )
     }

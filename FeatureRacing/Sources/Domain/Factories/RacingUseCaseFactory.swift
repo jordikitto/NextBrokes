@@ -17,4 +17,8 @@ public struct RacingUseCaseFactory {
     public func fetchNextRacesUseCase() -> FetchNextRacesUseCase {
         .init(racingRepository: racingRepository)
     }
+    
+    public func removeOldRacesUserCase() -> RemoveOldRacesUseCase {
+        .init()
+    }
 }

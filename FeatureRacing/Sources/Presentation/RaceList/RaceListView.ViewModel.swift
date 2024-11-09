@@ -17,5 +17,22 @@ extension RaceListView {
         }
         
         @Published private(set) var state: State = .loading
+        
+        let fetchNextRaces: FetchNextRacesUseCaseProtocol
+        
+        init(
+            fetchNextRaces: FetchNextRacesUseCaseProtocol
+        ) {
+            self.fetchNextRaces = fetchNextRaces
+        }
+        
+        func load() async {
+            do {
+                let races = try await fetchNextRaces(count: 5)
+                state = .loaded(races)
+            } catch {
+                state = .error(error.localizedDescription)
+            }
+        }
     }
 }

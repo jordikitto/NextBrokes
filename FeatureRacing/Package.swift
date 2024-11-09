@@ -16,6 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "CoreDesign", path: "../CoreDesign"),
+        .package(name: "CoreNetworking", path: "../CoreNetworking")
     ],
     targets: [
         .target(
@@ -28,11 +29,16 @@ let package = Package(
         ),
         .target(
             name: "FeatureRacingDomain",
-            dependencies: ["CoreDesign"],
+            dependencies: [
+                "CoreDesign",
+                "CoreNetworking",
+                "FeatureRacingData"
+            ],
             path: "Sources/Domain"
         ),
         .target(
             name: "FeatureRacingData",
+            dependencies: ["CoreNetworking"],
             path: "Sources/Data"
         ),
         .testTarget(

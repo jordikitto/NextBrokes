@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct NextBrokesApp: App {
+    private let dependencyContainer: DependencyContainer
+    
+    init() {
+        self.dependencyContainer = .shared
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NextRacesView()
         }
     }
 }

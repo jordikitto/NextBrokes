@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import FeatureRacingData
+import CoreNetworking
 
 public struct Race: Identifiable, Equatable {
     public var id: String
@@ -26,5 +28,21 @@ public struct Race: Identifiable, Equatable {
         self.meetingName = meetingName
         self.raceNumber = raceNumber
         self.category = category
+    }
+}
+
+extension Race {
+    init(from summary: NetworkRacingRequest.RacingResult.RaceSummary) throws {
+        guard let category = RaceCategory(rawValue: summary.categoryId) else {
+            throw NetworkError.decoding("category", summary.categoryId)
+        }
+        
+        self.init(
+            id: summary.raceId,
+            startDate: .init(timeIntervalSince1970: TimeInterval(summary.advertisedStart.seconds)),
+            meetingName: summary.meetingName,
+            raceNumber: summary.raceNumber,
+            category: category
+        )
     }
 }

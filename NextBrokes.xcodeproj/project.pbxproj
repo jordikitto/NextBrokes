@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D1348BE22CDEF2850070DF4C /* FeatureRacing in Frameworks */ = {isa = PBXBuildFile; productRef = D1348BE12CDEF2850070DF4C /* FeatureRacing */; };
 		D1348BE42CDEF2880070DF4C /* CoreDesign in Frameworks */ = {isa = PBXBuildFile; productRef = D1348BE32CDEF2880070DF4C /* CoreDesign */; };
+		D1B687912CDF27D700B47594 /* CoreNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = D1B687902CDF27D700B47594 /* CoreNetworking */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		D1348BCB2CDEEE980070DF4C /* NextBrokesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextBrokesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1348BDE2CDEEF520070DF4C /* CoreDesign */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreDesign; sourceTree = "<group>"; };
 		D1348BDF2CDEEF930070DF4C /* FeatureRacing */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FeatureRacing; sourceTree = "<group>"; };
+		D1B687802CDF115000B47594 /* CoreNetworking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreNetworking; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -61,6 +63,7 @@
 			files = (
 				D1348BE22CDEF2850070DF4C /* FeatureRacing in Frameworks */,
 				D1348BE42CDEF2880070DF4C /* CoreDesign in Frameworks */,
+				D1B687912CDF27D700B47594 /* CoreNetworking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +87,7 @@
 		D1348BA82CDEEE960070DF4C = {
 			isa = PBXGroup;
 			children = (
+				D1B687802CDF115000B47594 /* CoreNetworking */,
 				D1348BDE2CDEEF520070DF4C /* CoreDesign */,
 				D1348BDF2CDEEF930070DF4C /* FeatureRacing */,
 				D1348BB32CDEEE960070DF4C /* NextBrokes */,
@@ -133,6 +137,7 @@
 			packageProductDependencies = (
 				D1348BE12CDEF2850070DF4C /* FeatureRacing */,
 				D1348BE32CDEF2880070DF4C /* CoreDesign */,
+				D1B687902CDF27D700B47594 /* CoreNetworking */,
 			);
 			productName = NextBrokes;
 			productReference = D1348BB12CDEEE960070DF4C /* NextBrokes.app */;
@@ -602,6 +607,10 @@
 		D1348BE32CDEF2880070DF4C /* CoreDesign */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CoreDesign;
+		};
+		D1B687902CDF27D700B47594 /* CoreNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreNetworking;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

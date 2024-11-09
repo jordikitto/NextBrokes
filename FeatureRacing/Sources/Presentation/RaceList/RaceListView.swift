@@ -6,13 +6,24 @@
 //
 
 import SwiftUI
+import FeatureRacingDomain
 
-struct RaceListView: View {
-    var body: some View {
-        Text("Hello, World!")
+public struct RaceListView: View {
+    @StateObject private var viewModel: ViewModel
+    
+    public init(
+        racingUseCaseFactory: RacingUseCaseFactory
+    ) {
+        self._viewModel = .init(
+            wrappedValue: .init(
+                fetchNextRaces: racingUseCaseFactory.fetchNextRacesUseCase()
+            )
+        )
     }
-}
-
-#Preview {
-    RaceListView()
+    
+    public var body: some View {
+        Self.Content(
+            state: viewModel.state
+        )
+    }
 }

@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D1348BE22CDEF2850070DF4C /* FeatureRacing in Frameworks */ = {isa = PBXBuildFile; productRef = D1348BE12CDEF2850070DF4C /* FeatureRacing */; };
+		D1348BE42CDEF2880070DF4C /* CoreDesign in Frameworks */ = {isa = PBXBuildFile; productRef = D1348BE32CDEF2880070DF4C /* CoreDesign */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D1348BC22CDEEE980070DF4C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -54,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1348BE22CDEF2850070DF4C /* FeatureRacing in Frameworks */,
+				D1348BE42CDEF2880070DF4C /* CoreDesign in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +89,7 @@
 				D1348BB32CDEEE960070DF4C /* NextBrokes */,
 				D1348BC42CDEEE980070DF4C /* NextBrokesTests */,
 				D1348BCE2CDEEE980070DF4C /* NextBrokesUITests */,
+				D1348BE02CDEF2850070DF4C /* Frameworks */,
 				D1348BB22CDEEE960070DF4C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,6 +102,13 @@
 				D1348BCB2CDEEE980070DF4C /* NextBrokesUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D1348BE02CDEF2850070DF4C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -116,6 +131,8 @@
 			);
 			name = NextBrokes;
 			packageProductDependencies = (
+				D1348BE12CDEF2850070DF4C /* FeatureRacing */,
+				D1348BE32CDEF2880070DF4C /* CoreDesign */,
 			);
 			productName = NextBrokes;
 			productReference = D1348BB12CDEEE960070DF4C /* NextBrokes.app */;
@@ -576,6 +593,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D1348BE12CDEF2850070DF4C /* FeatureRacing */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeatureRacing;
+		};
+		D1348BE32CDEF2880070DF4C /* CoreDesign */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreDesign;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D1348BA92CDEEE960070DF4C /* Project object */;
 }

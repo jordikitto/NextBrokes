@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "73574DCF-9A95-4A38-8A27-F4316C6461A6",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:NextBrokes.xcodeproj",
+        "identifier" : "D1348BC02CDEEE980070DF4C",
+        "name" : "NextBrokesTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:CoreNetworking",
+        "identifier" : "CoreNetworkingTests",
+        "name" : "CoreNetworkingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:FeatureRacing",
+        "identifier" : "FeatureRacingTests",
+        "name" : "FeatureRacingTests"
+      }
+    }
+  ],
+  "version" : 1
+}

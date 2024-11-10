@@ -35,6 +35,7 @@
 		D1348BCB2CDEEE980070DF4C /* NextBrokesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextBrokesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1348BDE2CDEEF520070DF4C /* CoreDesign */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreDesign; sourceTree = "<group>"; };
 		D1348BDF2CDEEF930070DF4C /* FeatureRacing */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = FeatureRacing; sourceTree = "<group>"; };
+		D192033A2CE172E200126734 /* Unit Test Plan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Unit Test Plan.xctestplan"; sourceTree = "<group>"; };
 		D1B687802CDF115000B47594 /* CoreNetworking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreNetworking; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +88,7 @@
 		D1348BA82CDEEE960070DF4C = {
 			isa = PBXGroup;
 			children = (
+				D192033A2CE172E200126734 /* Unit Test Plan.xctestplan */,
 				D1B687802CDF115000B47594 /* CoreNetworking */,
 				D1348BDE2CDEEF520070DF4C /* CoreDesign */,
 				D1348BDF2CDEEF930070DF4C /* FeatureRacing */,

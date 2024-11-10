@@ -25,17 +25,17 @@ extension NextRaceListView {
         }
         
         enum Constant {
-            static let loadLimit = 10
-            static let displayLimit = 5
+            static let loadRatio = 2
         }
         
-        @Published private(set) var state: State = .loading(Constant.displayLimit)
+        @Published private(set) var state: State
         @Published var selectedCategories = Set(RaceCategory.allCases)
         
         var isFiltering: Bool {
             selectedCategories.count != RaceCategory.allCases.count
         }
         
+        private let raceDisplayLimit: Int
         private let fetchNextRaces: FetchNextRacesUseCaseProtocol
         private let removeOldRaces: RemoveOldRacesUseCaseProtocol
         private let cleanupTrigger: DateTriggerable
@@ -44,21 +44,29 @@ extension NextRaceListView {
         private var bag: Set<AnyCancellable> = []
         
         init(
+            displayLimit: Int,
             fetchNextRaces: FetchNextRacesUseCaseProtocol,
             removeOldRaces: RemoveOldRacesUseCaseProtocol,
             cleanupTrigger: any DateTriggerable
         ) {
+            self.raceDisplayLimit = displayLimit
             self.fetchNextRaces = fetchNextRaces
             self.removeOldRaces = removeOldRaces
             self.cleanupTrigger = cleanupTrigger
+            
+            if displayLimit > 0 {
+                self._state = .init(initialValue: .loading(displayLimit))
+            } else {
+                self._state = .init(initialValue: .error("Invalid display limit"))
+            }
             
             bindCleanupRaces()
             bindFiltering()
         }
         
-        func load() async {
+        func load() async {            
             do {
-                let races = try await fetchNextRaces(count: Constant.loadLimit)
+                let races = try await fetchNextRaces(count: raceDisplayLimit * Constant.loadRatio)
                 allRaces = races
                 updateRaces(races)
             } catch {
@@ -92,7 +100,7 @@ extension NextRaceListView {
             }
             
             // Only display a limited amount of races
-            let displayRaces = Array(filteredRaces.prefix(Constant.displayLimit))
+            let displayRaces = Array(filteredRaces.prefix(raceDisplayLimit))
             state = .loaded(displayRaces)
         }
         

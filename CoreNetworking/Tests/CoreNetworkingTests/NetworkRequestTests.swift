@@ -1,7 +1,7 @@
 import Testing
 @testable import CoreNetworking
 
-@Suite("Network Request Tests")
+@Suite("Network Request")
 struct NetworkRequestTests {
     typealias SUT = MockNetworkRequest<Bool>
     

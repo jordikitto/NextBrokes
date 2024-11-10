@@ -16,6 +16,7 @@ struct NextRacesView: View {
         VStack(spacing: .zero) {
             HeaderView(title: "Next to go racing")
             NextRaceListView(
+                displayLimit: 5,
                 racingUseCaseFactory: viewModel.racingUseCaseFactory
             )
             .padding(.horizontal, .spacing(.pt16))

@@ -12,10 +12,12 @@ public struct NextRaceListView: View {
     @StateObject private var viewModel: ViewModel
     
     public init(
+        displayLimit: Int,
         racingUseCaseFactory: RacingUseCaseFactory
     ) {
         self._viewModel = .init(
             wrappedValue: .init(
+                displayLimit: displayLimit,
                 fetchNextRaces: racingUseCaseFactory.fetchNextRacesUseCase(),
                 removeOldRaces: racingUseCaseFactory.removeOldRacesUserCase(),
                 cleanupTrigger: DateTrigger()

@@ -12,10 +12,14 @@ public struct NetworkRacingRequest: NetworkRequestProtocol {
     public typealias Response = NetworkDataResponse<RacingResult>
     
     public let path: String
+    public let headers: [String : String?]
     
     public init(method: Method, count: Int) {
-        // TODO: Implement header encoding
-        self.path = "/racing/?method=\(method.rawValue)&count=\(count)"
+        self.path = "/racing/"
+        self.headers = [
+            "method": method.rawValue,
+            "count": "\(count)"
+        ]
     }
     
     public enum Method: String {

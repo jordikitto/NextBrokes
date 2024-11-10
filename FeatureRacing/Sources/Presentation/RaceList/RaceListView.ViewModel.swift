@@ -63,7 +63,7 @@ extension RaceListView {
                 updateRaces(races)
             } catch {
                 Logger.raceListViewModel.error("Failed to load: \(error)")
-                state = .error("An error occurred. Please try again later.")
+                state = .error("An error occurred.\nPlease try again later.")
             }
         }
         

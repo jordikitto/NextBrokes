@@ -15,8 +15,4 @@ public struct NetworkEnvironment: Sendable {
         self.domain = domain
         self.basePath = basePath
     }
-    
-    public func route(path: String) -> URL? {
-        URL(string: domain + basePath + path)
-    }
 }

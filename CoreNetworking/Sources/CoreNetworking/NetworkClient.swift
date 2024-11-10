@@ -25,7 +25,7 @@ public struct NetworkClient: NetworkClientProtocol {
     }
     
     public func fetch<Request: NetworkRequestProtocol>(_ request: Request) async throws -> Request.Response {
-        guard let routeURL = environment.route(path: request.path) else {
+        guard let routeURL = request.url(environment: environment) else {
             throw NetworkError.invalidURL
         }
         

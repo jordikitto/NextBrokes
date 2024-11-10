@@ -16,14 +16,16 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "CoreDesign", path: "../CoreDesign"),
-        .package(name: "CoreNetworking", path: "../CoreNetworking")
+        .package(name: "CoreNetworking", path: "../CoreNetworking"),
+        .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols.git", branch: "stable")
     ],
     targets: [
         .target(
             name: "FeatureRacingPresentation",
             dependencies: [
                 "FeatureRacingDomain",
-                "CoreDesign"
+                "CoreDesign",
+                .product(name: "SFSafeSymbols", package: "sfsafesymbols")
             ],
             path: "Sources/Presentation",
             swiftSettings: [

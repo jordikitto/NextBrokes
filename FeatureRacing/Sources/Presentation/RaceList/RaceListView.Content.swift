@@ -8,6 +8,7 @@
 import SwiftUI
 import FeatureRacingDomain
 import CoreDesign
+import SFSafeSymbols
 
 extension RaceListView {
     struct Content: View {
@@ -33,7 +34,7 @@ extension RaceListView {
                 Button {
                     isPresentedFilterList = true
                 } label: {
-                    Label("Filter", systemImage: filterSymbolName)
+                    Label("Filter", systemSymbol: filterSymbol)
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
@@ -51,7 +52,7 @@ extension RaceListView {
                             Button {
                                 isPresentedFilterList = false
                             } label: {
-                                Image(systemName: "xmark")
+                                Image(systemSymbol: .xmark)
                             }
                         }
                     }
@@ -95,7 +96,7 @@ extension RaceListView {
         
         private func errorView(_ message: String) -> some View {
             VStack(spacing: 8) {
-                Image(systemName: "exclamationmark.circle")
+                Image(systemSymbol: .exclamationmarkCircle)
                     .imageScale(.large)
                     .padding(.top, 64)
                 Text(message)
@@ -118,10 +119,10 @@ extension RaceListView {
             }
         }
         
-        private var filterSymbolName: String {
+        private var filterSymbol: SFSymbol {
             isFiltering
-            ? "line.horizontal.3.decrease.circle.fill"
-            : "line.horizontal.3.decrease.circle"
+            ? .line3HorizontalDecreaseCircleFill
+            : .line3HorizontalDecreaseCircle
         }
     }
 }
@@ -135,7 +136,7 @@ extension RaceListView {
         RaceListView.Content(
             state: state,
             selectedCategories: $selectedCategories,
-            isFiltering: selectedCategories.count == RaceCategory.allCases.count
+            isFiltering: selectedCategories.count != RaceCategory.allCases.count
         )
         VStack {
             HStack {

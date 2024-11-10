@@ -26,22 +26,27 @@ public struct FetchNextRacesUseCase: FetchNextRacesUseCaseProtocol {
         let nextToGoIDs = result.nextToGoIds
         let raceSummaries = result.raceSummaries
         
-        let raceSummariesSorted: [NetworkRacingRequest.RacingResult.RaceSummary] = nextToGoIDs.compactMap { id in
-            guard let raceSummary = raceSummaries[id] else {
-                Logger.fetchNextRaces.warning("Missing summary for id: \(id)")
-                return nil
+        let raceSummariesSorted: [NetworkRacingRequest.RacingResult.RaceSummary] = nextToGoIDs
+            .compactMap { id in
+                guard let raceSummary = raceSummaries[id] else {
+                    Logger.fetchNextRaces.warning("Missing summary for id: \(id)")
+                    return nil
+                }
+                return raceSummary
             }
-            return raceSummary
-        }
         
-        return raceSummariesSorted.compactMap { raceSummary in
-            do {
-                return try .init(from: raceSummary)
-            } catch {
-                Logger.fetchNextRaces.error("Failed to create race from summary: \(raceSummary.raceId)")
-                return nil
+        return raceSummariesSorted
+            .compactMap { raceSummary in
+                do {
+                    return try .init(from: raceSummary)
+                } catch {
+                    Logger.fetchNextRaces.error("Failed to create race from summary: \(raceSummary.raceId)")
+                    return nil
+                }
             }
-        }
+            // Additional sorting, to ensure consistent ordering for same start times
+            .sorted(using: KeyPathComparator(\.meetingName))
+            .sorted(using: KeyPathComparator(\.startDate))
     }
 }
 

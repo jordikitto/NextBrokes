@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 
 public protocol NetworkClientProtocol: Sendable {
     func fetch<Request: NetworkRequestProtocol>(_ request: Request) async throws -> Request.Response
@@ -28,7 +29,10 @@ public struct NetworkClient: NetworkClientProtocol {
             throw NetworkError.invalidURL
         }
         
+        Logger.network.info("Fetching: \(routeURL.absoluteString)")
         let (data, _) = try await URLSession.shared.data(from: routeURL)
+        Logger.network.info("Fetched: \(routeURL.absoluteString)")
+        
         return try decoder.decode(Request.Response.self, from: data)
     }
 }

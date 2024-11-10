@@ -14,32 +14,42 @@ extension RaceListView {
         let state: ViewModel.State
         
         var body: some View {
-            VStack(spacing: .zero) {
-                switch state {
-                case .loading:
-                    VStack {
-                        ForEach(0..<5) { index in
-                            RaceListRowPlaceholderView(index: index)
+            ScrollView {
+                VStack(spacing: .zero) {
+                    switch state {
+                    case let .loading(count):
+                        VStack {
+                            ForEach(0..<count, id: \.self) { index in
+                                RaceListRowPlaceholderView(index: index)
+                            }
                         }
-                    }
-                case let .loaded(races):
-                    VStack {
-                        ForEach(races) { race in
-                            RaceListRowView(race: race)
+                    case let .loaded(races):
+                        VStack {
+                            ForEach(races) { race in
+                                RaceListRowView(race: race)
+                                    .transition(rowTransition)
+                            }
                         }
+                    case let .error(message):
+                        Text(message).foregroundStyle(.red)
                     }
-                case let .error(message):
-                    Text(message).foregroundStyle(.red)
                 }
+                .animation(.easeInOut, value: state)
             }
-            .animation(.easeInOut, value: state)
+        }
+        
+        private var rowTransition: AnyTransition {
+            .asymmetric(
+                insertion: .move(edge: .bottom).combined(with: .opacity),
+                removal: .move(edge: .top).combined(with: .opacity)
+            )
         }
     }
 }
 
 @available(iOS 18.0, *)
 #Preview {
-    @Previewable @State var state: RaceListView.ViewModel.State = .loading
+    @Previewable @State var state: RaceListView.ViewModel.State = .loading(5)
     
     ZStack {
         RaceListView.Content(state: state)
@@ -47,7 +57,7 @@ extension RaceListView {
             Spacer()
             HStack {
                 Button("Loading") {
-                    state = .loading
+                    state = .loading(5)
                 }
                 Button("Loaded") {
                     let races = (0..<5).map { index in

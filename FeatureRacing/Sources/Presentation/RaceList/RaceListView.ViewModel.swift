@@ -13,16 +13,22 @@ extension RaceListView {
     @MainActor
     final class ViewModel: ObservableObject {
         enum State: Equatable {
-            case loading
+            case loading(_ placeholderCount: Int)
             case loaded(_ races: [Race])
             case error(_ message: String)
         }
         
-        @Published private(set) var state: State = .loading
+        enum Constant {
+            static let loadLimit = 10
+            static let displayLimit = 5
+        }
+        
+        @Published private(set) var state: State = .loading(Constant.displayLimit)
         
         private let fetchNextRaces: FetchNextRacesUseCaseProtocol
         private let removeOldRaces: RemoveOldRacesUseCaseProtocol
         private let cleanupTrigger: DateTriggerable
+        
         private var bag: Set<AnyCancellable> = []
         
         init(
@@ -39,7 +45,7 @@ extension RaceListView {
         
         func load() async {
             do {
-                let races = try await fetchNextRaces(count: 5)
+                let races = try await fetchNextRaces(count: Constant.loadLimit)
                 updateRaces(races)
             } catch {
                 state = .error(error.localizedDescription)
@@ -49,9 +55,14 @@ extension RaceListView {
         // MARK: - Private
         
         private func updateRaces(_ races: [Race]) {
-            state = .loaded(races)
+            let displayRaces = Array(
+                removeOldRaces(races: races)
+                    .prefix(Constant.displayLimit)
+            )
             
-            guard let firstRace = races.first else { return }
+            state = .loaded(displayRaces)
+            
+            guard let firstRace = displayRaces.first else { return }
             updateCleanupTrigger(firstRace: firstRace)
         }
         
@@ -64,15 +75,11 @@ extension RaceListView {
             cleanupTrigger.triggerFired
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] in
-                    self?.cleanupRaces()
+                    Task { [weak self] in
+                        await self?.load()
+                    }
                 }
                 .store(in: &bag)
-        }
-        
-        private func cleanupRaces() {
-            guard case let .loaded(races) = state else { return }
-            let cleanedRaces = removeOldRaces(races: races)
-            state = .loaded(cleanedRaces)
         }
     }
 }

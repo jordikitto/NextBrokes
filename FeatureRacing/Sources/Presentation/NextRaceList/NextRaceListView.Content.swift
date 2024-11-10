@@ -140,23 +140,23 @@ extension NextRaceListView {
         )
         VStack {
             HStack {
-                Button("Loading") {
+                Button("Loading".catalogExcluded) {
                     state = .loading(5)
                 }
-                Button("Loaded") {
+                Button("Loaded".catalogExcluded) {
                     let races = (0..<5).map { index in
                         Race(
                             id: "\(index)",
                             startDate: Date().addingTimeInterval(TimeInterval(10 * index)),
-                            meetingName: "Meeting \(index)",
+                            meetingName: "Meeting \(index)".catalogExcluded,
                             raceNumber: index,
                             category: RaceCategory.allCases.randomElement() ?? .horse
                         )
                     }
                     state = .loaded(races)
                 }
-                Button("Error") {
-                    state = .error("An error occurred")
+                Button("Error".catalogExcluded) {
+                    state = .error("An error occurred".catalogExcluded)
                 }
             }
             .buttonStyle(.bordered)

@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "FeatureRacing",
+    defaultLocalization: "en",
     platforms: [.iOS(.v15)],
     products: [
         .library(
@@ -28,6 +29,9 @@ let package = Package(
                 .product(name: "SFSafeSymbols", package: "sfsafesymbols")
             ],
             path: "Sources/Presentation",
+            resources: [
+                .process("Resources")
+            ],
             swiftSettings: [
                 .swiftLanguageMode(.v5)
             ]

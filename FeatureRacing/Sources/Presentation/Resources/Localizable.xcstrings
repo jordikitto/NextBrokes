@@ -1,0 +1,18 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Deselect categories to hide them from the list." : {
+
+    },
+    "Filter" : {
+
+    },
+    "Filters" : {
+
+    },
+    "Race %lld" : {
+
+    }
+  },
+  "version" : "1.0"
+}

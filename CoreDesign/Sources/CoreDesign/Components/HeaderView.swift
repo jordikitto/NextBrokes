@@ -24,7 +24,7 @@ public struct HeaderView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background {
                 RoundedRectangle(cornerRadius: .radius(.large))
-                    .fill(Color(.systemGray2))
+                    .fill(Color.accentColor)
                     .ignoresSafeArea(.container, edges: .top)
             }
     }

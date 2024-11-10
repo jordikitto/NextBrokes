@@ -36,3 +36,9 @@ public struct NetworkClient: NetworkClientProtocol {
         return try decoder.decode(Request.Response.self, from: data)
     }
 }
+
+// MARK: - Extensions
+
+private extension Logger {
+    static let network = Logger(subsystem: "core.networking", category: "Network")
+}

@@ -8,6 +8,7 @@
 import Foundation
 import FeatureRacingDomain
 import Combine
+import OSLog
 
 extension RaceListView {
     @MainActor
@@ -61,7 +62,8 @@ extension RaceListView {
                 allRaces = races
                 updateRaces(races)
             } catch {
-                state = .error(error.localizedDescription)
+                Logger.raceListViewModel.error("Failed to load: \(error)")
+                state = .error("An error occurred. Please try again later.")
             }
         }
         
@@ -120,4 +122,10 @@ extension RaceListView {
                 .store(in: &bag)
         }
     }
+}
+
+// MARK: - Extensions
+
+private extension Logger {
+    static let raceListViewModel = Logger(subsystem: "feature.racing", category: "RaceListView.ViewModel")
 }

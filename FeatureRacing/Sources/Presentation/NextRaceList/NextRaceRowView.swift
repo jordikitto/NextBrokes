@@ -1,5 +1,5 @@
 //
-//  RaceListRowView.swift
+//  NextRaceRowView.swift
 //  FeatureRacing
 //
 //  Created by Jordi Kitto on 9/11/2024.
@@ -9,7 +9,7 @@ import SwiftUI
 import CoreDesign
 import FeatureRacingDomain
 
-struct RaceListRowView: View {
+struct NextRaceRowView: View {
     
     let raceStartDate: Date
     let meetingName: String
@@ -43,7 +43,7 @@ struct RaceListRowView: View {
     }
 }
 
-extension RaceListRowView {
+extension NextRaceRowView {
     init(race: Race) {
         self.init(
             raceStartDate: race.startDate,
@@ -56,13 +56,13 @@ extension RaceListRowView {
 
 #Preview {
     VStack {
-        RaceListRowView(
+        NextRaceRowView(
             raceStartDate: Date(),
             meetingName: "Flemington",
             raceNumber: 4,
             icon: .greyhound
         )
-        RaceListRowView(
+        NextRaceRowView(
             raceStartDate: Date().addingTimeInterval(20),
             meetingName: "Wentworth",
             raceNumber: 100,

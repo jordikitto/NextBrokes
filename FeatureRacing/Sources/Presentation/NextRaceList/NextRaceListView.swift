@@ -1,5 +1,5 @@
 //
-//  RaceListView.swift
+//  NextRaceListView.swift
 //  FeatureRacing
 //
 //  Created by Jordi Kitto on 9/11/2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 import FeatureRacingDomain
 
-public struct RaceListView: View {
+public struct NextRaceListView: View {
     @StateObject private var viewModel: ViewModel
     
     public init(

@@ -1,5 +1,5 @@
 //
-//  RaceListRowPlaceholderView.swift
+//  NextRaceRowPlaceholderView.swift
 //  FeatureRacing
 //
 //  Created by Jordi Kitto on 9/11/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RaceListRowPlaceholderView: View {
+struct NextRaceRowPlaceholderView: View {
     @State private var toggle = false
     
     let offsetIndex: Double
@@ -17,7 +17,7 @@ struct RaceListRowPlaceholderView: View {
     }
     
     var body: some View {
-        RaceListRowView(
+        NextRaceRowView(
             raceStartDate: .now,
             meetingName: "",
             raceNumber: 0,
@@ -44,11 +44,11 @@ struct RaceListRowPlaceholderView: View {
 
 #Preview {
     VStack {
-        RaceListRowPlaceholderView(index: 0)
-        RaceListRowPlaceholderView(index: 1)
-        RaceListRowPlaceholderView(index: 2)
-        RaceListRowPlaceholderView(index: 3)
-        RaceListRowPlaceholderView(index: 4)
+        NextRaceRowPlaceholderView(index: 0)
+        NextRaceRowPlaceholderView(index: 1)
+        NextRaceRowPlaceholderView(index: 2)
+        NextRaceRowPlaceholderView(index: 3)
+        NextRaceRowPlaceholderView(index: 4)
     }
     .padding()
 }

@@ -1,5 +1,5 @@
 //
-//  RaceListView.ViewModel.swift
+//  NextRaceListView.ViewModel.swift
 //  FeatureRacing
 //
 //  Created by Jordi Kitto on 9/11/2024.
@@ -10,7 +10,7 @@ import FeatureRacingDomain
 import Combine
 import OSLog
 
-extension RaceListView {
+extension NextRaceListView {
     @MainActor
     final class ViewModel: ObservableObject {
         enum State: Equatable {

@@ -15,7 +15,7 @@ struct NextRacesView: View {
     var body: some View {
         VStack(spacing: .zero) {
             HeaderView(title: "Next to go racing")
-            RaceListView(
+            NextRaceListView(
                 racingUseCaseFactory: viewModel.racingUseCaseFactory
             )
             .padding(.horizontal, .spacing(.pt16))

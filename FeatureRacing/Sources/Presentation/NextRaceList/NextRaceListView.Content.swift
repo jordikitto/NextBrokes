@@ -1,5 +1,5 @@
 //
-//  RaceListView.Content.swift
+//  NextRaceListView.Content.swift
 //  FeatureRacing
 //
 //  Created by Jordi Kitto on 9/11/2024.
@@ -10,7 +10,7 @@ import FeatureRacingDomain
 import CoreDesign
 import SFSafeSymbols
 
-extension RaceListView {
+extension NextRaceListView {
     struct Content: View {
         @State private var isPresentedFilterList = false
         
@@ -75,7 +75,7 @@ extension RaceListView {
         private func placeHolderView(count: Int) -> some View {
             scrollView {
                 ForEach(0..<count, id: \.self) { index in
-                    RaceListRowPlaceholderView(index: index)
+                    NextRaceRowPlaceholderView(index: index)
                 }
             }
         }
@@ -83,7 +83,7 @@ extension RaceListView {
         private func loadedView(_ races: [Race]) -> some View {
             scrollView {
                 ForEach(races) { race in
-                    RaceListRowView(race: race)
+                    NextRaceRowView(race: race)
                         .transition(
                             rowTransition(
                                 isFirst: race == races.first,
@@ -129,11 +129,11 @@ extension RaceListView {
 
 @available(iOS 18.0, *)
 #Preview {
-    @Previewable @State var state: RaceListView.ViewModel.State = .loading(5)
+    @Previewable @State var state: NextRaceListView.ViewModel.State = .loading(5)
     @Previewable @State var selectedCategories = Set(RaceCategory.allCases)
     
     VStack {
-        RaceListView.Content(
+        NextRaceListView.Content(
             state: state,
             selectedCategories: $selectedCategories,
             isFiltering: selectedCategories.count != RaceCategory.allCases.count

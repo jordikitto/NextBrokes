@@ -25,7 +25,10 @@ let package = Package(
                 "FeatureRacingDomain",
                 "CoreDesign"
             ],
-            path: "Sources/Presentation"
+            path: "Sources/Presentation",
+            swiftSettings: [
+                .swiftLanguageMode(.v5)
+            ]
         ),
         .target(
             name: "FeatureRacingDomain",
@@ -36,7 +39,7 @@ let package = Package(
             ],
             path: "Sources/Domain",
             swiftSettings: [
-                .swiftLanguageMode(.v5) // DateTrigger
+                .swiftLanguageMode(.v5)
             ]
         ),
         .target(
@@ -46,7 +49,13 @@ let package = Package(
         ),
         .testTarget(
             name: "FeatureRacingTests",
-            dependencies: ["FeatureRacingPresentation", "FeatureRacingDomain"]
+            dependencies: [
+                "FeatureRacingPresentation",
+                "FeatureRacingDomain"
+            ],
+            swiftSettings: [
+                .swiftLanguageMode(.v5)
+            ]
         ),
     ]
 )

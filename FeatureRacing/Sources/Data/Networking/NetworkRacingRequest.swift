@@ -26,18 +26,18 @@ public struct NetworkRacingRequest: NetworkRequestProtocol {
         case nextRaces = "nextraces"
     }
     
-    public struct RacingResult: Decodable {
+    public struct RacingResult: Decodable, Sendable {
         public let nextToGoIds: [String]
         public let raceSummaries: [String: RaceSummary]
         
-        public struct RaceSummary: Decodable {
+        public struct RaceSummary: Decodable, Sendable {
             public let raceId: String
             public let raceNumber: Int
             public let meetingName: String
             public let categoryId: String
             public let advertisedStart: AdvertisedStart
             
-            public struct AdvertisedStart: Decodable {
+            public struct AdvertisedStart: Decodable, Sendable {
                 public let seconds: Int
             }
         }

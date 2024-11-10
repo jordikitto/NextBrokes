@@ -7,8 +7,9 @@
 
 import Foundation
 import FeatureRacingData
+import OSLog
 
-public protocol FetchNextRacesUseCaseProtocol: Sendable {
+public protocol FetchNextRacesUseCaseProtocol {
     func callAsFunction(count: Int) async throws -> [Race]
 }
 
@@ -27,7 +28,7 @@ public struct FetchNextRacesUseCase: FetchNextRacesUseCaseProtocol {
         
         let raceSummariesSorted: [NetworkRacingRequest.RacingResult.RaceSummary] = nextToGoIDs.compactMap { id in
             guard let raceSummary = raceSummaries[id] else {
-                // Log error
+                Logger.fetchNextRaces.warning("Missing summary for id: \(id)")
                 return nil
             }
             return raceSummary
@@ -37,9 +38,13 @@ public struct FetchNextRacesUseCase: FetchNextRacesUseCaseProtocol {
             do {
                 return try .init(from: raceSummary)
             } catch {
-                // Log error
+                Logger.fetchNextRaces.error("Failed to create race from summary: \(raceSummary.raceId)")
                 return nil
             }
         }
     }
+}
+
+extension Logger {
+    static let fetchNextRaces = Logger(subsystem: "feature.racing", category: "FetchNextRaces")
 }

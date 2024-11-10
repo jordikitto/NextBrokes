@@ -17,8 +17,8 @@ extension RaceListView {
             case loaded(_ races: [Race])
             case error(_ message: String)
             
-            var isLoaded: Bool {
-                guard case .loaded = self else { return false }
+            var isLoading: Bool {
+                guard case .loading = self else { return false }
                 return true
             }
         }
@@ -30,6 +30,10 @@ extension RaceListView {
         
         @Published private(set) var state: State = .loading(Constant.displayLimit)
         @Published var selectedCategories = Set(RaceCategory.allCases)
+        
+        var isFiltering: Bool {
+            selectedCategories.count != RaceCategory.allCases.count
+        }
         
         private let fetchNextRaces: FetchNextRacesUseCaseProtocol
         private let removeOldRaces: RemoveOldRacesUseCaseProtocol
@@ -64,15 +68,30 @@ extension RaceListView {
         // MARK: - Private
         
         private func updateRaces(_ races: [Race]) {
-            let displayRaces = Array(
-                removeOldRaces(races: races)
-                    .prefix(Constant.displayLimit)
-            )
+            // Only want races that are "upcoming"
+            let upcomingRaces = removeOldRaces(races: races)
             
+            // Run cleanup based on next upcoming race
+            if let firstUpcomingRace = upcomingRaces.first {
+                updateCleanupTrigger(firstRace: firstUpcomingRace)
+            }
+            
+            // Only want races that match filters
+            let filteredRaces = upcomingRaces.filter { selectedCategories.contains($0.category) }
+            
+            // Ensure we have at least one race to show now
+            guard !filteredRaces.isEmpty else {
+                if isFiltering {
+                    state = .error("No races match current filters. Please change filters.")
+                } else {
+                    state = .error("No races currently available. Please try again later.")
+                }
+                return
+            }
+            
+            // Only display a limited amount of races
+            let displayRaces = Array(filteredRaces.prefix(Constant.displayLimit))
             state = .loaded(displayRaces)
-            
-            guard let firstRace = displayRaces.first else { return }
-            updateCleanupTrigger(firstRace: firstRace)
         }
         
         private func updateCleanupTrigger(firstRace: Race) {
@@ -93,12 +112,10 @@ extension RaceListView {
         
         private func bindFiltering() {
             $selectedCategories
-                .compactMap { [weak self] selectedCategories in
-                    self?.allRaces?.filter { selectedCategories.contains($0.category) }
-                }
                 .receive(on: DispatchQueue.main)
-                .sink { [weak self] filteredRaces in
-                    self?.updateRaces(filteredRaces)
+                .sink { [weak self] _ in
+                    guard let allRaces = self?.allRaces else { return }
+                    self?.updateRaces(allRaces)
                 }
                 .store(in: &bag)
         }

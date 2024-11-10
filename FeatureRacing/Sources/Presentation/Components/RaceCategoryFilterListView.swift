@@ -34,7 +34,6 @@ struct RaceCategoryFilterListView: View {
                                 .foregroundStyle(.black)
                         }
                     }
-                    .disabled(cannotDeselectCategory(category))
                 }
             } footer: {
                 Text("Deselect categories to hide them from the list.")
@@ -54,10 +53,6 @@ struct RaceCategoryFilterListView: View {
                 }
             }
         )
-    }
-    
-    private func cannotDeselectCategory(_ category: RaceCategory) -> Bool {
-        selectedCategories == [category]
     }
 }
 

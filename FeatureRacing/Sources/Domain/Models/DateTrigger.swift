@@ -22,11 +22,15 @@ public class DateTrigger: DateTriggerable {
     public init() {}
     
     public func schedule(_ date: Date) {
+        timer?.invalidate()
+        timer = nil
+        
         timer = Timer(fire: date, interval: 0, repeats: false) { [weak self] timer in
             self?.publisher.send()
             timer.invalidate()
             self?.timer = nil
         }
+        
         guard let timer else { return }
         RunLoop.main.add(timer, forMode: .common)
     }

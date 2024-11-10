@@ -26,7 +26,8 @@ public struct RaceListView: View {
     public var body: some View {
         Self.Content(
             state: viewModel.state,
-            selectedCategories: $viewModel.selectedCategories
+            selectedCategories: $viewModel.selectedCategories,
+            isFiltering: viewModel.isFiltering
         )
         .task {
             await viewModel.load()

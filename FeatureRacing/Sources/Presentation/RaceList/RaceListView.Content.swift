@@ -15,28 +15,30 @@ extension RaceListView {
         
         let state: ViewModel.State
         @Binding var selectedCategories: Set<RaceCategory>
+        let isFiltering: Bool
         
         var body: some View {
-            ScrollView {
-                VStack(spacing: .zero) {
-                    switch state {
-                    case let .loading(count):
-                        placeHolderView(count: count)
-                    case let .loaded(races):
-                        loadedView(races)
-                    case let .error(message):
-                        Text(message).foregroundStyle(.red)
-                    }
+            VStack(spacing: .zero) {
+                switch state {
+                case let .loading(count):
+                    placeHolderView(count: count)
+                case let .loaded(races):
+                    loadedView(races)
+                case let .error(message):
+                    errorView(message)
                 }
             }
+            .frame(maxHeight: .infinity) // Ensures error view also fills screen
             .overlay(alignment: .bottom) {
                 Button {
                     isPresentedFilterList = true
                 } label: {
-                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                    Label("Filter", systemImage: filterSymbolName)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(!state.isLoaded)
+                .controlSize(.large)
+                .disabled(state.isLoading)
+                .padding(.bottom)
             }
             .animation(.easeInOut, value: state)
             .sheet(isPresented: $isPresentedFilterList) {
@@ -58,8 +60,18 @@ extension RaceListView {
             }
         }
         
+        private func scrollView<V: View>(
+            @ViewBuilder _ content: () -> V
+        ) -> some View {
+            ScrollView {
+                VStack {
+                    content()
+                }
+            }
+        }
+        
         private func placeHolderView(count: Int) -> some View {
-            VStack {
+            scrollView {
                 ForEach(0..<count, id: \.self) { index in
                     RaceListRowPlaceholderView(index: index)
                 }
@@ -67,19 +79,48 @@ extension RaceListView {
         }
         
         private func loadedView(_ races: [Race]) -> some View {
-            VStack {
+            scrollView {
                 ForEach(races) { race in
                     RaceListRowView(race: race)
-                        .transition(rowTransition)
+                        .transition(
+                            rowTransition(
+                                isFirst: race == races.first,
+                                isLast: race == races.last
+                            )
+                        )
                 }
             }
         }
         
-        private var rowTransition: AnyTransition {
-            .asymmetric(
-                insertion: .move(edge: .bottom).combined(with: .opacity),
-                removal: .move(edge: .top).combined(with: .opacity)
-            )
+        private func errorView(_ message: String) -> some View {
+            VStack(spacing: 8) {
+                Image(systemName: "exclamationmark.circle")
+                    .imageScale(.large)
+                    .padding(.top, 64)
+                Text(message)
+                Spacer()
+            }
+            .font(.title2)
+            .multilineTextAlignment(.center)
+            .foregroundStyle(.secondary)
+            .padding(.horizontal)
+            .transition(.scale(scale: 0.8).combined(with: .opacity))
+        }
+        
+        private func rowTransition(isFirst: Bool, isLast: Bool) -> AnyTransition {
+            if isFirst {
+                return .move(edge: .top).combined(with: .opacity)
+            } else if isLast {
+                return .move(edge: .bottom).combined(with: .opacity)
+            } else {
+                return .scale(scale: 0.8).combined(with: .opacity)
+            }
+        }
+        
+        private var filterSymbolName: String {
+            isFiltering
+            ? "line.horizontal.3.decrease.circle.fill"
+            : "line.horizontal.3.decrease.circle"
         }
     }
 }
@@ -92,7 +133,8 @@ extension RaceListView {
     VStack {
         RaceListView.Content(
             state: state,
-            selectedCategories: $selectedCategories
+            selectedCategories: $selectedCategories,
+            isFiltering: selectedCategories.count == RaceCategory.allCases.count
         )
         VStack {
             HStack {

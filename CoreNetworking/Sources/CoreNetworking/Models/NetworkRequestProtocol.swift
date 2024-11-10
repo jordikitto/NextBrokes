@@ -15,7 +15,7 @@ public protocol NetworkRequestProtocol {
 }
 
 extension NetworkRequestProtocol {
-    var queryItems: [URLQueryItem] {
+    var headerQueryItems: [URLQueryItem] {
         headers
             .compactMapValues { $0 }
             .map { .init(name: $0.key, value: $0.value) }
@@ -28,7 +28,10 @@ extension NetworkRequestProtocol {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             return nil
         }
-        urlComponents.queryItems = queryItems
+        let queryItems = headerQueryItems
+        if !queryItems.isEmpty {
+            urlComponents.queryItems = queryItems
+        }
         return urlComponents.url
     }
 }

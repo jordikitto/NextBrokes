@@ -18,7 +18,7 @@ struct NextRacesView: View {
             RaceListView(
                 racingUseCaseFactory: viewModel.racingUseCaseFactory
             )
-            .padding(.horizontal)
+            .padding(.horizontal, .spacing(.pt16))
         }
     }
 }

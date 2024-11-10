@@ -17,10 +17,10 @@ struct RaceListRowView: View {
     let icon: Icon
     
     var body: some View {
-        HStack {
+        HStack(spacing: .zero) {
             ColoredCountdownView(targetDate: raceStartDate)
             Spacer()
-            HStack {
+            HStack(spacing: .spacing(.pt8)) {
                 VStack(alignment: .trailing) {
                     Text(meetingName)
                         .bold()
@@ -28,14 +28,14 @@ struct RaceListRowView: View {
                 }
                 IconView(icon: icon)
                     .imageScale(.large)
-                    .padding(10)
+                    .padding(.spacing(.pt8))
                     .background {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color(.systemGray5))
                     }
             }
         }
-        .padding()
+        .padding(.spacing(.pt14))
         .background {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color(.systemGray6))
@@ -55,11 +55,20 @@ extension RaceListRowView {
 }
 
 #Preview {
-    RaceListRowView(
-        raceStartDate: Date(),
-        meetingName: "Flemington",
-        raceNumber: 4,
-        icon: .greyhound
-    )
+    VStack {
+        RaceListRowView(
+            raceStartDate: Date(),
+            meetingName: "Flemington",
+            raceNumber: 4,
+            icon: .greyhound
+        )
+        RaceListRowView(
+            raceStartDate: Date().addingTimeInterval(20),
+            meetingName: "Wentworth",
+            raceNumber: 100,
+            icon: .harness
+        )
+        .environment(\.dynamicTypeSize, .xxxLarge)
+    }
     .padding()
 }

@@ -39,7 +39,7 @@ extension RaceListView {
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
                 .disabled(state.isLoading)
-                .padding(.bottom)
+                .padding(.bottom, .spacing(.pt20))
             }
             .animation(.easeInOut, value: state)
             .sheet(isPresented: $isPresentedFilterList) {
@@ -65,9 +65,9 @@ extension RaceListView {
             @ViewBuilder _ content: () -> V
         ) -> some View {
             ScrollView {
-                VStack {
+                VStack(spacing: .spacing(.pt2)) {
                     content()
-                        .padding(.top)
+                        .padding(.top, .spacing(.pt16))
                 }
             }
         }
@@ -98,14 +98,14 @@ extension RaceListView {
             VStack(spacing: 8) {
                 Image(systemSymbol: .exclamationmarkCircle)
                     .imageScale(.large)
-                    .padding(.top, 64)
+                    .padding(.top, .spacing(.pt36))
                 Text(message)
                 Spacer()
             }
             .font(.title2)
             .multilineTextAlignment(.center)
             .foregroundStyle(.secondary)
-            .padding(.horizontal)
+            .padding(.horizontal, .spacing(.pt20))
             .transition(.scale(scale: 0.8).combined(with: .opacity))
         }
         

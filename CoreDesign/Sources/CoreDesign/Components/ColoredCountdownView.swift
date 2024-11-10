@@ -32,11 +32,11 @@ public struct ColoredCountdownView: View {
             +
             Text(targetDate, style: .timer)
         }
-        .padding()
+        .padding(.spacing(.pt12))
+        .frame(minWidth: minWidth)
         .background {
             RoundedRectangle(cornerRadius: 10)
                 .fill(backgroundColor)
-                .frame(minWidth: minWidth)
                 .animation(.linear, value: secondsRemaining)
         }
         .onReceive(timer) { _ in

@@ -20,7 +20,7 @@ public struct HeaderView: View {
             .font(.title3)
             .fontWeight(.bold)
             .foregroundStyle(.white)
-            .padding()
+            .padding(.spacing(.pt16))
             .frame(maxWidth: .infinity, alignment: .leading)
             .background {
                 RoundedRectangle(cornerRadius: 10)

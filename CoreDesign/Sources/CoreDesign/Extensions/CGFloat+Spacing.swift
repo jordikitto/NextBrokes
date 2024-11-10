@@ -16,7 +16,7 @@ public extension CGFloat {
         spacing.rawValue
     }
     
-    public enum Spacing: CGFloat, CaseIterable {
+    enum Spacing: CGFloat, CaseIterable {
         case pt36 = 36
         case pt26 = 26
         case pt24 = 24

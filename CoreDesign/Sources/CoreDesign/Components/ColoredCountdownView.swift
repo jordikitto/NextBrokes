@@ -35,7 +35,7 @@ public struct ColoredCountdownView: View {
         .padding(.spacing(.pt12))
         .frame(minWidth: minWidth)
         .background {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: .radius(.small))
                 .fill(backgroundColor)
                 .animation(.linear, value: secondsRemaining)
         }

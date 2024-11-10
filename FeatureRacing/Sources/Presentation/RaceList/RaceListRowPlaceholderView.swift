@@ -25,7 +25,7 @@ struct RaceListRowPlaceholderView: View {
         )
         .hidden()
         .overlay {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: .radius(.large))
                 .fill(color)
         }
         .onAppear {

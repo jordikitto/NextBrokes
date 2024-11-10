@@ -30,14 +30,14 @@ struct RaceListRowView: View {
                     .imageScale(.large)
                     .padding(.spacing(.pt8))
                     .background {
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: .radius(.small))
                             .fill(Color(.systemGray5))
                     }
             }
         }
         .padding(.spacing(.pt14))
         .background {
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: .radius(.large))
                 .fill(Color(.systemGray6))
         }
     }

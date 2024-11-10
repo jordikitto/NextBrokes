@@ -23,7 +23,7 @@ public struct HeaderView: View {
             .padding(.spacing(.pt16))
             .frame(maxWidth: .infinity, alignment: .leading)
             .background {
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: .radius(.large))
                     .fill(Color(.systemGray2))
                     .ignoresSafeArea(.container, edges: .top)
             }

@@ -14,7 +14,7 @@ struct NextRaceRowView: View {
     let raceStartDate: Date
     let meetingName: String
     let raceNumber: Int
-    let icon: Icon
+    let category: RaceCategory
     
     var body: some View {
         HStack(spacing: .zero) {
@@ -24,16 +24,19 @@ struct NextRaceRowView: View {
                 VStack(alignment: .trailing) {
                     Text(meetingName)
                         .bold()
+                        .accessibilityLabel("Meeting \(meetingName).")
                     Text("Race \(raceNumber)")
                 }
-                IconView(icon: icon)
+                IconView(icon: category.icon)
                     .imageScale(.large)
                     .padding(.spacing(.pt8))
                     .background {
                         RoundedRectangle(cornerRadius: .radius(.small))
                             .fill(Color(.systemGray5))
                     }
+                    .accessibilityLabel("Category \(category.title)")
             }
+            .accessibilityElement(children: .combine)
         }
         .padding(.spacing(.pt14))
         .multilineTextAlignment(.trailing)
@@ -50,7 +53,7 @@ extension NextRaceRowView {
             raceStartDate: race.startDate,
             meetingName: race.meetingName,
             raceNumber: race.raceNumber,
-            icon: race.category.icon
+            category: race.category
         )
     }
 }
@@ -61,13 +64,13 @@ extension NextRaceRowView {
             raceStartDate: Date(),
             meetingName: "Flemington",
             raceNumber: 4,
-            icon: .greyhound
+            category: .greyhound
         )
         NextRaceRowView(
             raceStartDate: Date().addingTimeInterval(20),
             meetingName: "Wentworth",
             raceNumber: 100,
-            icon: .harness
+            category: .harness
         )
         .environment(\.dynamicTypeSize, .xxxLarge)
     }

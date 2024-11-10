@@ -15,11 +15,11 @@ struct NextRacesView: View {
     var body: some View {
         VStack(spacing: .zero) {
             HeaderView(title: String(localized: "Next to go racing"))
+                .accessibilityAddTraits(.isHeader)
             NextRaceListView(
                 displayLimit: 5,
                 racingUseCaseFactory: viewModel.racingUseCaseFactory
             )
-            .padding(.horizontal, .spacing(.pt16))
         }
     }
 }

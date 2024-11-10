@@ -69,11 +69,12 @@ extension NextRaceListView {
             ScrollView {
                 LazyVGrid(
                     columns: [GridItem(.adaptive(minimum: 300, maximum: maxWidth))],
-                    spacing: .spacing(.pt2)
+                    spacing: .spacing(.pt16)
                 ) {
                     content()
-                        .padding(.top, .spacing(.pt16))
                 }
+                .padding(.top, .spacing(.pt16))
+                .padding(.horizontal, .spacing(.pt16))
             }
         }
         

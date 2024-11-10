@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Category %@" : {
+
+    },
     "Deselect categories to hide them from the list." : {
 
     },
@@ -8,6 +11,9 @@
 
     },
     "Filters" : {
+
+    },
+    "Meeting %@." : {
 
     },
     "Race %lld" : {

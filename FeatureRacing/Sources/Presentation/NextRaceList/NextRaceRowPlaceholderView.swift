@@ -21,7 +21,7 @@ struct NextRaceRowPlaceholderView: View {
             raceStartDate: .now,
             meetingName: "",
             raceNumber: 0,
-            icon: .greyhound
+            category: .greyhound
         )
         .hidden()
         .overlay {

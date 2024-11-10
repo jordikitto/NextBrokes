@@ -66,6 +66,7 @@ extension RaceListView {
             ScrollView {
                 VStack {
                     content()
+                        .padding(.top)
                 }
             }
         }

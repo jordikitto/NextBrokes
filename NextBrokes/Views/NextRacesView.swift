@@ -7,14 +7,18 @@
 
 import SwiftUI
 import FeatureRacingPresentation
+import CoreDesign
 
 struct NextRacesView: View {
     @StateObject private var viewModel = ViewModel()
     
     var body: some View {
-        RaceListView(
-            racingUseCaseFactory: viewModel.racingUseCaseFactory
-        )
-        .padding(.horizontal)
+        VStack(spacing: .zero) {
+            HeaderView(title: "Next to go racing")
+            RaceListView(
+                racingUseCaseFactory: viewModel.racingUseCaseFactory
+            )
+            .padding(.horizontal)
+        }
     }
 }

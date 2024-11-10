@@ -9,7 +9,7 @@ import Testing
 import Combine
 @testable import FeatureRacingDomain
 
-@Suite("Date Trigger Tests")
+@Suite("Date Trigger")
 struct DateTriggerTests {
     typealias SUT = DateTrigger
 

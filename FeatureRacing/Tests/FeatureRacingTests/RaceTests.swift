@@ -10,7 +10,7 @@ import Foundation
 @testable import FeatureRacingDomain
 @testable import FeatureRacingData
 
-@Suite("Race Tests")
+@Suite("Race")
 struct RaceTests {
     typealias SUT = Race
 

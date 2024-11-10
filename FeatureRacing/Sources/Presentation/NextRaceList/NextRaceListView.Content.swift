@@ -12,6 +12,8 @@ import SFSafeSymbols
 
 extension NextRaceListView {
     struct Content: View {
+        @ScaledMetric private var maxWidth = 400
+        
         @State private var isPresentedFilterList = false
         
         let state: ViewModel.State
@@ -65,7 +67,10 @@ extension NextRaceListView {
             @ViewBuilder _ content: () -> V
         ) -> some View {
             ScrollView {
-                VStack(spacing: .spacing(.pt2)) {
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 300, maximum: maxWidth))],
+                    spacing: .spacing(.pt2)
+                ) {
                     content()
                         .padding(.top, .spacing(.pt16))
                 }

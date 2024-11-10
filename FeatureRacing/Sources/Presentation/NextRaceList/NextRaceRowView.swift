@@ -36,6 +36,7 @@ struct NextRaceRowView: View {
             }
         }
         .padding(.spacing(.pt14))
+        .multilineTextAlignment(.trailing)
         .background {
             RoundedRectangle(cornerRadius: .radius(.large))
                 .fill(Color(.systemGray6))

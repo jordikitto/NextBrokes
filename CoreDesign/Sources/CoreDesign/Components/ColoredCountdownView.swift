@@ -50,14 +50,14 @@ public struct ColoredCountdownView: View {
     }
     
     private var backgroundColor: Color {
-        if secondsRemaining < 0 {
+        if secondsRemaining <= 0 {
             Color.red
         } else if secondsRemaining < 20 {
             Color.orange
         } else if secondsRemaining < 60 {
             Color.green
         }  else {
-            Color.gray.opacity(0.3)
+            Color(.systemGray5)
         }
     }
 }

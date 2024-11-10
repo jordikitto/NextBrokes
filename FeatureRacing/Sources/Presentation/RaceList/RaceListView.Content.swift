@@ -7,34 +7,71 @@
 
 import SwiftUI
 import FeatureRacingDomain
+import CoreDesign
 
 extension RaceListView {
     struct Content: View {
+        @State private var isPresentedFilterList = false
         
         let state: ViewModel.State
+        @Binding var selectedCategories: Set<RaceCategory>
         
         var body: some View {
             ScrollView {
                 VStack(spacing: .zero) {
                     switch state {
                     case let .loading(count):
-                        VStack {
-                            ForEach(0..<count, id: \.self) { index in
-                                RaceListRowPlaceholderView(index: index)
-                            }
-                        }
+                        placeHolderView(count: count)
                     case let .loaded(races):
-                        VStack {
-                            ForEach(races) { race in
-                                RaceListRowView(race: race)
-                                    .transition(rowTransition)
-                            }
-                        }
+                        loadedView(races)
                     case let .error(message):
                         Text(message).foregroundStyle(.red)
                     }
                 }
-                .animation(.easeInOut, value: state)
+            }
+            .overlay(alignment: .bottom) {
+                Button {
+                    isPresentedFilterList = true
+                } label: {
+                    Label("Filter", systemImage: "line.3.horizontal.decrease.circle")
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(!state.isLoaded)
+            }
+            .animation(.easeInOut, value: state)
+            .sheet(isPresented: $isPresentedFilterList) {
+                NavigationView {
+                    RaceCategoryFilterListView(
+                        selectedCategories: $selectedCategories
+                    )
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                isPresentedFilterList = false
+                            } label: {
+                                Image(systemName: "xmark")
+                            }
+                        }
+                    }
+                }
+                .mediumPresentationDetent()
+            }
+        }
+        
+        private func placeHolderView(count: Int) -> some View {
+            VStack {
+                ForEach(0..<count, id: \.self) { index in
+                    RaceListRowPlaceholderView(index: index)
+                }
+            }
+        }
+        
+        private func loadedView(_ races: [Race]) -> some View {
+            VStack {
+                ForEach(races) { race in
+                    RaceListRowView(race: race)
+                        .transition(rowTransition)
+                }
             }
         }
         
@@ -50,11 +87,14 @@ extension RaceListView {
 @available(iOS 18.0, *)
 #Preview {
     @Previewable @State var state: RaceListView.ViewModel.State = .loading(5)
+    @Previewable @State var selectedCategories = Set(RaceCategory.allCases)
     
-    ZStack {
-        RaceListView.Content(state: state)
+    VStack {
+        RaceListView.Content(
+            state: state,
+            selectedCategories: $selectedCategories
+        )
         VStack {
-            Spacer()
             HStack {
                 Button("Loading") {
                     state = .loading(5)

@@ -16,6 +16,11 @@ extension RaceListView {
             case loading(_ placeholderCount: Int)
             case loaded(_ races: [Race])
             case error(_ message: String)
+            
+            var isLoaded: Bool {
+                guard case .loaded = self else { return false }
+                return true
+            }
         }
         
         enum Constant {
@@ -24,11 +29,13 @@ extension RaceListView {
         }
         
         @Published private(set) var state: State = .loading(Constant.displayLimit)
+        @Published var selectedCategories = Set(RaceCategory.allCases)
         
         private let fetchNextRaces: FetchNextRacesUseCaseProtocol
         private let removeOldRaces: RemoveOldRacesUseCaseProtocol
         private let cleanupTrigger: DateTriggerable
         
+        private var allRaces: [Race]?
         private var bag: Set<AnyCancellable> = []
         
         init(
@@ -41,11 +48,13 @@ extension RaceListView {
             self.cleanupTrigger = cleanupTrigger
             
             bindCleanupRaces()
+            bindFiltering()
         }
         
         func load() async {
             do {
                 let races = try await fetchNextRaces(count: Constant.loadLimit)
+                allRaces = races
                 updateRaces(races)
             } catch {
                 state = .error(error.localizedDescription)
@@ -78,6 +87,18 @@ extension RaceListView {
                     Task { [weak self] in
                         await self?.load()
                     }
+                }
+                .store(in: &bag)
+        }
+        
+        private func bindFiltering() {
+            $selectedCategories
+                .compactMap { [weak self] selectedCategories in
+                    self?.allRaces?.filter { selectedCategories.contains($0.category) }
+                }
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] filteredRaces in
+                    self?.updateRaces(filteredRaces)
                 }
                 .store(in: &bag)
         }

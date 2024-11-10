@@ -15,6 +15,14 @@ public enum RaceCategory: String, Identifiable, CaseIterable, Equatable, Sendabl
     
     public var id: String { rawValue }
     
+    public var title: String {
+        switch self {
+        case .greyhound: "Greyhound"
+        case .harness: "Harness"
+        case .horse: "Horse"
+        }
+    }
+    
     public var icon: Icon {
         switch self {
         case .greyhound: .greyhound

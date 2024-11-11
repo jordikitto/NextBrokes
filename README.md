@@ -37,6 +37,8 @@ Races are automatically refreshed when old races are removed, ensuring up-to-dat
 
 Various errors have been handled, to ensure the app doesn't crash and the user is provided with relevant feedback.
 
+The design system package is setup to provide consistency throughout the app. Key custom functionality missing from the design system is fonts and colors. Since there is no provided specification for these, Apple's built-in fonts and colors have been used instead for consistency.
+
 ### Design
 Ease of use is key, along with a focus on the next race and when it starts. 
 

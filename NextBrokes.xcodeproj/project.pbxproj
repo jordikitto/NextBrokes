@@ -41,9 +41,22 @@
 		D1EC43CC2CE18CC9002A6C41 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D1EC43D02CE19174002A6C41 /* Exceptions for "NextBrokes" folder in "NextBrokes" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/repo-image.png",
+			);
+			target = D1348BB02CDEEE960070DF4C /* NextBrokes */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D1348BB32CDEEE960070DF4C /* NextBrokes */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D1EC43D02CE19174002A6C41 /* Exceptions for "NextBrokes" folder in "NextBrokes" target */,
+			);
 			path = NextBrokes;
 			sourceTree = "<group>";
 		};

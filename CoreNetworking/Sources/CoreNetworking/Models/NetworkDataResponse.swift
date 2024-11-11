@@ -15,4 +15,3 @@ public struct NetworkDataResponse<Data: Decodable>: Decodable {
     public let status: Int
     public let data: Data
 }
-    

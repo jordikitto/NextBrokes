@@ -59,7 +59,7 @@ public struct ColoredCountdownView: View {
             Color.orange
         } else if secondsRemaining < 60 {
             Color.green
-        }  else {
+        } else {
             Color(.systemGray5)
         }
     }

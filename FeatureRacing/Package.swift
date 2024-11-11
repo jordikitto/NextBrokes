@@ -13,7 +13,7 @@ let package = Package(
                 "FeatureRacingPresentation",
                 "FeatureRacingDomain"
             ]
-        ),
+        )
     ],
     dependencies: [
         .package(name: "CoreDesign", path: "../CoreDesign"),
@@ -62,6 +62,6 @@ let package = Package(
             swiftSettings: [
                 .swiftLanguageMode(.v5)
             ]
-        ),
+        )
     ]
 )

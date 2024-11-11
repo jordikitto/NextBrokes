@@ -13,7 +13,7 @@ public struct NetworkRacingRequest: NetworkRequestProtocol {
     public typealias Response = NetworkDataResponse<RacingResult>
     
     public let path: String
-    public let parameters: [String : String?]
+    public let parameters: [String: String?]
     
     /// Create a new request to fetch racing data.
     /// - Parameters:

@@ -1,0 +1,7 @@
+disabled_rules:
+  - trailing_whitespace
+
+nesting:
+  type_level:
+    - 3
+    - 5

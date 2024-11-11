@@ -14,7 +14,6 @@ import Foundation
 struct RaceTests {
     typealias SUT = Race
 
-    
     @Test("Initialises from network response")
     func testInitFromNetworkResponse() throws {
         let startDate = Date.now.addingTimeInterval(10)

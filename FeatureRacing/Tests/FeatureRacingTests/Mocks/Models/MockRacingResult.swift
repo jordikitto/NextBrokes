@@ -12,7 +12,7 @@ import FeatureRacingDomain
 extension NetworkRacingRequest.RacingResult {
     static func mock(
         nextToGoIds: [String],
-        raceSummaries: [String : RaceSummary]
+        raceSummaries: [String: RaceSummary]
     ) -> Self {
         .init(
             nextToGoIds: nextToGoIds,

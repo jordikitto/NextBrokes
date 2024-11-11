@@ -32,7 +32,7 @@ struct RaceCategoryFilterListView: View {
                             Text(category.title)
                         } icon: {
                             IconView(icon: category.icon)
-                                .foregroundStyle(.black)
+                                .foregroundStyle(Color.primary)
                         }
                     }
                 }

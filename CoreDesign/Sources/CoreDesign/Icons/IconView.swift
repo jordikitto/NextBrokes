@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// Displays a custom icon.
+///
+/// Adjust the size using `.imageScale(_:)`.
 public struct IconView: View {
     @Environment(\.imageScale) var imageScale
     
@@ -25,6 +28,7 @@ public struct IconView: View {
             )
     }
     
+    /// Size values taken from Figma design system.
     private var size: CGSize {
         switch imageScale {
         case .large: return .init(width: 32, height: 32)

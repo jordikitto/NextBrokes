@@ -9,10 +9,16 @@ import Foundation
 import FeatureRacingData
 import OSLog
 
+/// Protocol for use case that fetches upcoming races.
 public protocol FetchNextRacesUseCaseProtocol {
     func callAsFunction(count: Int) async throws -> [Race]
 }
 
+/// Use case that fetches upcoming races.
+///
+/// Use to fetch upcoming races in a consistent, sorted order.
+///
+/// - Warning: Missing race summaries, or summaries that fail to initialise will be skipped.
 public struct FetchNextRacesUseCase: FetchNextRacesUseCaseProtocol {
     private let racingRepository: RacingRepositoryProtocol
     
@@ -26,6 +32,7 @@ public struct FetchNextRacesUseCase: FetchNextRacesUseCaseProtocol {
         let nextToGoIDs = result.nextToGoIds
         let raceSummaries = result.raceSummaries
         
+        // Map from ids list to summaries list
         let raceSummariesSorted: [NetworkRacingRequest.RacingResult.RaceSummary] = nextToGoIDs
             .compactMap { id in
                 guard let raceSummary = raceSummaries[id] else {
@@ -35,6 +42,7 @@ public struct FetchNextRacesUseCase: FetchNextRacesUseCaseProtocol {
                 return raceSummary
             }
         
+        // Return successfully initialised, and sorted races.
         return raceSummariesSorted
             .compactMap { raceSummary in
                 do {

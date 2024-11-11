@@ -9,6 +9,7 @@ import SwiftUI
 import FeatureRacingDomain
 import CoreDesign
 
+/// Allows the user to select various race categories, useful for filtering functionality.
 struct RaceCategoryFilterListView: View {
     
     @Binding var selectedCategories: Set<RaceCategory>

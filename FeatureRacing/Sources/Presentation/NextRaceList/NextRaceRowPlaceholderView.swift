@@ -7,11 +7,13 @@
 
 import SwiftUI
 
+/// Placeholder view for ``NextRaceRowView``.
 struct NextRaceRowPlaceholderView: View {
     @State private var toggle = false
     
     let offsetIndex: Double
     
+    /// - Parameter index: Index in list. Used for animation delay.
     init(index: Int) {
         self.offsetIndex = Double(index)
     }
@@ -29,7 +31,9 @@ struct NextRaceRowPlaceholderView: View {
                 .fill(color)
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4 * offsetIndex) {
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + 0.4 * offsetIndex
+            ) {
                 withAnimation(.linear(duration: 1).repeatForever()) {
                     toggle.toggle()
                 }
@@ -38,7 +42,7 @@ struct NextRaceRowPlaceholderView: View {
     }
     
     private var color: Color {
-        toggle ? .gray.opacity(0.4) : .gray.opacity(0.2)
+        toggle ? Color(.systemGray4) : Color(.systemGray5)
     }
 }
 

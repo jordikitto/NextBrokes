@@ -11,13 +11,17 @@ import CoreDesign
 import SFSafeSymbols
 
 extension NextRaceListView {
+    /// Content of ``NextRaceListView``, using only simple data for easy preview.
     struct Content: View {
+        /// Max width of a row in the grid.
         @ScaledMetric private var maxWidth = 400
-        
+        /// Whether filter list is being presented.
         @State private var isPresentedFilterList = false
-        
+        /// Current state.
         let state: ViewModel.State
+        /// Selected categories, used for filtering.
         @Binding var selectedCategories: Set<RaceCategory>
+        /// Whether the list is being filtered.
         let isFiltering: Bool
         
         var body: some View {
@@ -33,35 +37,17 @@ extension NextRaceListView {
             }
             .frame(maxHeight: .infinity) // Ensures error view also fills screen
             .overlay(alignment: .bottom) {
-                Button {
-                    isPresentedFilterList = true
-                } label: {
-                    Label("Filter", systemSymbol: filterSymbol)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .disabled(state.isLoading)
-                .padding(.bottom, .spacing(.pt20))
+                filterButton
+                    .padding(.bottom, .spacing(.pt20))
             }
             .animation(.easeInOut, value: state)
             .sheet(isPresented: $isPresentedFilterList) {
-                NavigationView {
-                    RaceCategoryFilterListView(
-                        selectedCategories: $selectedCategories
-                    )
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button {
-                                isPresentedFilterList = false
-                            } label: {
-                                Image(systemSymbol: .xmark)
-                            }
-                        }
-                    }
-                }
-                .mediumPresentationDetent()
+                filterSheet
+                    .mediumPresentationDetent()
             }
         }
+        
+        // MARK: - Private
         
         private func scrollView<V: View>(
             @ViewBuilder _ content: () -> V
@@ -115,6 +101,7 @@ extension NextRaceListView {
             .transition(.scale(scale: 0.8).combined(with: .opacity))
         }
         
+        /// Row transition that adjust if element is first or last in the list.
         private func rowTransition(isFirst: Bool, isLast: Bool) -> AnyTransition {
             if isFirst {
                 return .move(edge: .top).combined(with: .opacity)
@@ -125,10 +112,39 @@ extension NextRaceListView {
             }
         }
         
+        private var filterButton: some View {
+            Button {
+                isPresentedFilterList = true
+            } label: {
+                Label("Filter", systemSymbol: filterSymbol)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .disabled(state.isLoading)
+        }
+        
+        /// Symbol for filter button. Is filled is user is actively filtering.
         private var filterSymbol: SFSymbol {
             isFiltering
             ? .line3HorizontalDecreaseCircleFill
             : .line3HorizontalDecreaseCircle
+        }
+        
+        private var filterSheet: some View {
+            NavigationView {
+                RaceCategoryFilterListView(
+                    selectedCategories: $selectedCategories
+                )
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            isPresentedFilterList = false
+                        } label: {
+                            Image(systemSymbol: .xmark)
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -8,13 +8,15 @@
 import Foundation
 import CoreNetworking
 
+/// A container for dependencies used throughout the app.
 final class DependencyContainer {
     static let shared = DependencyContainer()
     
-    public let networkClient: NetworkClient
+    /// NEDS API client.
+    public let nedsNetworkClient: NetworkClient
     
     private init() {
-        self.networkClient = Self.initNetworkClient()
+        self.nedsNetworkClient = Self.initNetworkClient()
     }
 
     private static func initNetworkClient() -> NetworkClient {

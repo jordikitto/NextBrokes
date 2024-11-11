@@ -9,6 +9,7 @@ import SwiftUI
 import FeatureRacingPresentation
 import CoreDesign
 
+/// Displays the next to go races list.
 struct NextRacesView: View {
     @StateObject private var viewModel = ViewModel()
     

@@ -14,7 +14,7 @@ extension NextRacesView {
         let racingUseCaseFactory: RacingUseCaseFactory
         
         init(
-            networkClient: NetworkClientProtocol = DependencyContainer.shared.networkClient
+            networkClient: NetworkClientProtocol = DependencyContainer.shared.nedsNetworkClient
         ) {
             self.racingUseCaseFactory = .init(
                 racingRepository: RacingRepository(

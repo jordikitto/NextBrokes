@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Factory to wrap the creation of use cases related to racing.
 public struct RacingUseCaseFactory {
     private let racingRepository: RacingRepositoryProtocol
     

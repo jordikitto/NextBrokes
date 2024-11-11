@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// A view that displays a header with a title.
+///
+/// Should be used as the topmost view in a screen, to act as the header for the content.
 public struct HeaderView: View {
     
     let title: String

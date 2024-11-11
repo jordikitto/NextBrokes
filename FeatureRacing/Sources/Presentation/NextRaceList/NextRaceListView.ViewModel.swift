@@ -14,8 +14,11 @@ extension NextRaceListView {
     @MainActor
     final class ViewModel: ObservableObject {
         enum State: Equatable {
+            /// Loading, with placeholders being displayed.
             case loading(_ placeholderCount: Int)
+            /// Loaded, with races being displayed.
             case loaded(_ races: [Race])
+            /// Error, with a message being displayed.
             case error(_ message: String)
             
             var isLoading: Bool {
@@ -25,21 +28,28 @@ extension NextRaceListView {
         }
         
         enum Constant {
+            /// Ratio for number of races to display vs number of races to load.
+            ///
+            /// In other words, we want to load twice as many races as we display.
             static let loadRatio = 2
         }
         
+        /// Current state of the view.
         @Published private(set) var state: State
+        /// Selected categories, used for filtering. Only show races that match these categories.
         @Published var selectedCategories = Set(RaceCategory.allCases)
-        
+        /// Whether user has "applied filters".
         var isFiltering: Bool {
             selectedCategories.count != RaceCategory.allCases.count
         }
         
+        /// Amount of races to display to user.
         private let raceDisplayLimit: Int
         private let fetchNextRaces: FetchNextRacesUseCaseProtocol
         private let removeOldRaces: RemoveOldRacesUseCaseProtocol
         private let cleanupTrigger: DateTriggerable
         
+        /// All races returned from the server.
         private var allRaces: [Race]?
         private var bag: Set<AnyCancellable> = []
         
@@ -64,7 +74,8 @@ extension NextRaceListView {
             bindFiltering()
         }
         
-        func load() async {            
+        /// Attempt to load races from server.
+        func load() async {
             do {
                 let races = try await fetchNextRaces(count: raceDisplayLimit * Constant.loadRatio)
                 allRaces = races
@@ -77,6 +88,7 @@ extension NextRaceListView {
         
         // MARK: - Private
         
+        /// Updates the UI and any state using the given races.
         private func updateRaces(_ races: [Race]) {
             // Only want races that are "upcoming"
             let upcomingRaces = removeOldRaces(races: races)
@@ -104,11 +116,13 @@ extension NextRaceListView {
             state = .loaded(displayRaces)
         }
         
+        /// Updates the cleanup trigger to fire when the given race ended a minute ago.
         private func updateCleanupTrigger(firstRace: Race) {
             let oneMinuteAfterRaceEnds = firstRace.startDate.addingTimeInterval(60)
             cleanupTrigger.schedule(oneMinuteAfterRaceEnds)
         }
         
+        /// Binds the cleanup trigger to reload all races.
         private func bindCleanupRaces() {
             cleanupTrigger.triggerFired
                 .receive(on: DispatchQueue.main)
@@ -120,6 +134,7 @@ extension NextRaceListView {
                 .store(in: &bag)
         }
         
+        /// Binds the selected categories to update the races shown.
         private func bindFiltering() {
             $selectedCategories
                 .receive(on: DispatchQueue.main)

@@ -9,11 +9,17 @@ import Foundation
 import FeatureRacingData
 import CoreNetworking
 
+/// A racing event.
 public struct Race: Identifiable, Equatable, Sendable {
+    /// Unique identifier for the race.
     public var id: String
+    /// Date which the race starts.
     public let startDate: Date
+    /// Name of where the race takes place.
     public let meetingName: String
+    /// Number of the race.
     public let raceNumber: Int
+    /// Category of the race.
     public let category: RaceCategory
     
     public init(
@@ -32,6 +38,7 @@ public struct Race: Identifiable, Equatable, Sendable {
 }
 
 extension Race {
+    /// Initialise from a network response.
     init(from summary: NetworkRacingRequest.RacingResult.RaceSummary) throws {
         guard let category = RaceCategory(rawValue: summary.categoryId) else {
             throw NetworkError.decoding("category", summary.categoryId)

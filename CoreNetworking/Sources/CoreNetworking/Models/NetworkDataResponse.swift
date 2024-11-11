@@ -7,6 +7,9 @@
 
 import Foundation
 
+/// A generic response from a network request.
+///
+/// Essentially acts as a wrapper for the underlying ``data``.
 public struct NetworkDataResponse<Data: Decodable>: Decodable {
     public let message: String?
     public let status: Int

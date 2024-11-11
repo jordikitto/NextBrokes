@@ -8,15 +8,20 @@
 import Foundation
 import CoreNetworking
 
+/// Request to fetch racing data.
 public struct NetworkRacingRequest: NetworkRequestProtocol {
     public typealias Response = NetworkDataResponse<RacingResult>
     
     public let path: String
-    public let headers: [String : String?]
+    public let parameters: [String : String?]
     
+    /// Create a new request to fetch racing data.
+    /// - Parameters:
+    ///   - method: Method to fetch races with.
+    ///   - count: Amount of races to fetch.
     public init(method: Method, count: Int) {
         self.path = "/racing/"
-        self.headers = [
+        self.parameters = [
             "method": method.rawValue,
             "count": "\(count)"
         ]

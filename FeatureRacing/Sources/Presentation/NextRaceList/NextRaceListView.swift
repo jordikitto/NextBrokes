@@ -8,9 +8,12 @@
 import SwiftUI
 import FeatureRacingDomain
 
+/// List of races that are going to happen next.
 public struct NextRaceListView: View {
     @StateObject private var viewModel: ViewModel
     
+    /// - Parameters:
+    ///   - displayLimit: Amount of races to display
     public init(
         displayLimit: Int,
         racingUseCaseFactory: RacingUseCaseFactory

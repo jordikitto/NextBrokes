@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+/// A countdown view that changes color based on the remaining time.
+///
+/// This generic component is useful for displaying countdowns throughout the app.
 public struct ColoredCountdownView: View {
     @ScaledMetric private var minWidth: CGFloat = 80
     
@@ -33,7 +36,7 @@ public struct ColoredCountdownView: View {
             Text(targetDate, style: .timer)
         }
         .padding(.spacing(.pt12))
-        .frame(minWidth: minWidth)
+        .frame(minWidth: minWidth) // Ensure consistent width
         .background {
             RoundedRectangle(cornerRadius: .radius(.small))
                 .fill(backgroundColor)

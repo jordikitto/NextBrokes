@@ -9,6 +9,7 @@ import SwiftUI
 import CoreDesign
 import FeatureRacingDomain
 
+/// Displays a race row, for use in a list.
 struct NextRaceRowView: View {
     
     let raceStartDate: Date
@@ -20,34 +21,41 @@ struct NextRaceRowView: View {
         HStack(spacing: .zero) {
             ColoredCountdownView(targetDate: raceStartDate)
             Spacer()
-            HStack(spacing: .spacing(.pt8)) {
-                VStack(alignment: .trailing) {
-                    Text(meetingName)
-                        .bold()
-                        .accessibilityLabel("Meeting \(meetingName).")
-                    Text("Race \(raceNumber)")
-                }
-                IconView(icon: category.icon)
-                    .imageScale(.large)
-                    .padding(.spacing(.pt8))
-                    .background {
-                        RoundedRectangle(cornerRadius: .radius(.small))
-                            .fill(Color(.systemGray5))
-                    }
-                    .accessibilityLabel("Category \(category.title)")
-            }
-            .accessibilityElement(children: .combine)
+            raceDetailsView
         }
         .padding(.spacing(.pt14))
-        .multilineTextAlignment(.trailing)
         .background {
             RoundedRectangle(cornerRadius: .radius(.large))
                 .fill(Color(.systemGray6))
         }
     }
+    
+    // MARK: - Private
+    
+    private var raceDetailsView: some View {
+        HStack(spacing: .spacing(.pt8)) {
+            VStack(alignment: .trailing) {
+                Text(meetingName)
+                    .bold()
+                    .accessibilityLabel("Meeting \(meetingName).")
+                Text("Race \(raceNumber)")
+            }
+            IconView(icon: category.icon)
+                .imageScale(.large)
+                .padding(.spacing(.pt8))
+                .background {
+                    RoundedRectangle(cornerRadius: .radius(.small))
+                        .fill(Color(.systemGray5))
+                }
+                .accessibilityLabel("Category \(category.title)")
+        }
+        .accessibilityElement(children: .combine)
+        .multilineTextAlignment(.trailing)
+    }
 }
 
 extension NextRaceRowView {
+    /// Initialise from a `Race`.
     init(race: Race) {
         self.init(
             raceStartDate: race.startDate,

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Custom icons used in the app.
 public enum Icon: CaseIterable {
     case greyhound
     case harness

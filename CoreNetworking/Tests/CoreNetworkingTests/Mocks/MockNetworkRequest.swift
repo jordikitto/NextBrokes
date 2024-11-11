@@ -11,5 +11,5 @@ import Foundation
 struct MockNetworkRequest<R: Decodable>: NetworkRequestProtocol {
     typealias Response = R
     var path: String
-    var headers: [String : String?]
+    var parameters: [String : String?]
 }

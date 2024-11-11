@@ -10,6 +10,7 @@ import SwiftUICore
 
 public extension View {
     @ViewBuilder
+    /// Backwards compatible method for `.presentationDetents([.medium])`.
     func mediumPresentationDetent() -> some View {
         if #available(iOS 16.0, *) {
             self.presentationDetents([.medium])

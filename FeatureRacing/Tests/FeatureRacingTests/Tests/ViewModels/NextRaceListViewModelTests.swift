@@ -96,10 +96,9 @@ struct NextRaceListViewModelTests {
         
         // WHEN cleanup trigger fires, and a race is now old
         removeOldRaces.result = [race2]
-        cleanupTrigger.fire()
-        
-        // Wait for next run loop
-        try await Task.sleep(nanoseconds: 1_000_000)
+        try await change(of: sut.$state, expectedChangeCount: 1) {
+            cleanupTrigger.fire()
+        }
         
         // THEN races updated successfully
         #expect(sut.state == .loaded([race2]))
@@ -124,28 +123,25 @@ struct NextRaceListViewModelTests {
         #expect(sut.state == .loaded([race1, race2]))
         
         // WHEN filters are changed
-        sut.selectedCategories = [.harness]
-        
-        // Wait for next run loop
-        try await Task.sleep(nanoseconds: 1_000_000)
+        try await change(of: sut.$state, expectedChangeCount: 1) {
+            sut.selectedCategories = [.harness]
+        }
         
         // THEN only filter matching races are loaded
         #expect(sut.state == .loaded([race3]))
         
         // WHEN all filters are applied
-        sut.selectedCategories = []
-        
-        // Wait for next run loop
-        try await Task.sleep(nanoseconds: 1_000_000)
+        try await change(of: sut.$state, expectedChangeCount: 1) {
+            sut.selectedCategories = []
+        }
         
         // THEN this is an error state
         #expect(sut.state.isError)
         
         // WHEN all filters are removed
-        sut.selectedCategories = Set(RaceCategory.allCases)
-        
-        // Wait for next run loop
-        try await Task.sleep(nanoseconds: 1_000_000)
+        try await change(of: sut.$state, expectedChangeCount: 1) {
+            sut.selectedCategories = Set(RaceCategory.allCases)
+        }
         
         // THEN all races are loaded
         #expect(sut.state == .loaded([race1, race2, race3]))

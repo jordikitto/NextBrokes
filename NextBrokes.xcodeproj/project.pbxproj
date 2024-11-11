@@ -39,6 +39,7 @@
 		D192033A2CE172E200126734 /* Unit Test Plan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Unit Test Plan.xctestplan"; sourceTree = "<group>"; };
 		D1B687802CDF115000B47594 /* CoreNetworking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CoreNetworking; sourceTree = "<group>"; };
 		D1EC43CC2CE18CC9002A6C41 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		D1EC43D12CE194EC002A6C41 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -113,6 +114,7 @@
 				D1348BE02CDEF2850070DF4C /* Frameworks */,
 				D1348BB22CDEEE960070DF4C /* Products */,
 				D1EC43CC2CE18CC9002A6C41 /* .swiftlint.yml */,
+				D1EC43D12CE194EC002A6C41 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};

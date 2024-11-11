@@ -25,7 +25,7 @@ struct DateTriggerTests {
             }
             
             // WHEN next run loop is executed
-            try await Task.sleep(nanoseconds: 1)
+            try await Task.sleep(nanoseconds: 1_000_000)
         }
         
         // THEN test passed since it was not confirmed

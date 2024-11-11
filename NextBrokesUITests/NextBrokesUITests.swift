@@ -8,6 +8,5 @@
 import XCTest
 
 final class NextBrokesUITests: XCTestCase {
-
     // No app UI tests currently
 }

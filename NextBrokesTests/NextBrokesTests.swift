@@ -9,7 +9,5 @@ import Testing
 @testable import NextBrokes
 
 struct NextBrokesTests {
-
-    // No app tests needed currently.
-
+    // No app unit tests needed currently. See tests in packages however.
 }
